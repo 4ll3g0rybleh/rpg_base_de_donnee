@@ -29,6 +29,9 @@
     #on lance le jeu 
 
 
+#recuperer les heros:
+#on récupere ds une liste les héros depuis la bdd
+
 #composition de l'équipe: 
 #création d'une variable équipe vide 
 #boucle de la creation de l'équipe jusqu'à ce qu'elle soit complète:
@@ -79,11 +82,13 @@
         #chaque perso de l'équipe attaque le monstre 
         #ses pvs réduisent à chaque fois
     #si les pvs du monstre sont pos
-        #on choisit un héro de l'équipe aléatoire
+        #on choisit un héro target de l'équipe aléatoire
         #le monstre attaque 
         #le héro subit des dégats
     #vérifier si les pvs du héro target sont negatifs:
         #enlever le héro de l'équipe active
-    #le score prend +1
-    #victoire du joueur
+#le score prend +1
+#victoire du joueur
+
+
 
