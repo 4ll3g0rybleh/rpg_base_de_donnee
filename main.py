@@ -44,17 +44,22 @@
 #on quitte le jeu
 
 #le déroulement du jeu :
-#tant que les pv de ch héro sont supérieurs à 0
+#vérifier les pvs de chaque joueur 
     #on lance une vague
     #score +1
-#retour au menu principal
+#défaite retour au menu principal
 
+#vérifier les pv des persos: 
+#les pvs sont supéreurs à 0
+
+#vérifier les pvs de l'équipe:
+#vérifier les pvs de chaque membre de l'équipe 
+#si un héro a des pvs 
 
 #vague:
 #on récupère un monstre alétoire depuis la bdd
-#tant que les pv du monstre sont supérieurs à 0: 
+#vérifier les pvs du monstre: 
     #chaque perso de l'équipe attaque le monstre et ses pvs réduisent à chaque fois
     #le monstre attaque un perso aléatoire
     #il subit des dégats 
 #victoire du joueur
-#
