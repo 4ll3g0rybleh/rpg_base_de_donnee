@@ -98,9 +98,10 @@
 #TODO: DÉGATSSSS
 
 #jeu(user_team):
+#score = 0
     #tant que team_is_alive(user_team)
         #on lance une vague
-        #si is_team_alive
+        #si is_team_alive():
             #score+1
     #défaite()
 
@@ -108,7 +109,6 @@
 
 
 #vague(active_team):
-    #on initialise un score à 0
     #monstres=get_active_monsters()
     #tant que is_alive(random_monster) et is_team_alive(active_team) :
         #combat_phase(active_team, monstres)
@@ -117,7 +117,29 @@
 #combat_phase(active_team, monstres):
     #on récupère dans une variable random_monster un monstre aléatoire pick_random_choice(monstres) 
     #team_on_monster(active_team, random_monster)
-    #on recupère dans target_hero le retour de monster_on_
+    #monster_on_team(active_team, random_monster)
+
+
+#team_on_monster(active_team, random_monster):
+    #pour chaque perso de l'equipe 
+        #si perso is_alive()   
+            #dégâts(perso, random_monster)
+            #print_attaque(perso, random_monster) 
+
+#monster_on_team(active_team, random_monster):
+    #si is_alive(random_monster)
+        #on affecte pick_random_choice(active_team) à une var target_hero
+        #degats(target_hero)
+        #print_attaque(random_monster, target_hero)
+        #on retourne le target_hero
+    #sinon:
+        #on supprime le random_monster de la liste monstres
+
+
+#degats(character1, character2):
+    #on récupère les données d'attaque de chaque character(attk pr character1 et HP+DEF pr character 2)
+    #
+
 
 
 #insert_ranked_player: 
@@ -148,23 +170,6 @@
 
 
 
-team(active_team, random_monster)
-
-
-#team_on_monster(active_team, random_monster):
-    #pour chaque perso de l'equipe 
-        #si perso is alive   
-            #dégâts(random_monster)
-            #print_attaque(perso, random_monster) 
-
-#monster_on_team(active_team, random_monster):
-    #si is_alive(random_monster)
-        #on affecte pick_random_choice(active_team) à une var target_hero
-        #degats(target_hero)
-        #print_attaque(random_monster, target_hero)
-        #on retourne le target_hero
-    #sinon:
-        #on supprime le random_monster de la liste monstres
 
 
 #défaite():
