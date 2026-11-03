@@ -9,33 +9,33 @@
 
 
 #afficher le menu():
-#on affiche le header du jeu print_header()
-#on affiche le menu des choix 
+    #on affiche le header du jeu print_header()
+    #on affiche le menu des choix 
 
 #get_choice():
-#demander un input utilisateur dans une var chocie
-#retourner le choice
+    #demander un input utilisateur dans une var chocie
+    #retourner le choice
 
 #vérifier choix valide():
-#boucle infinie:
-    #recupérer get_choice() dans une variable choice
-        #doit être un chiffre 
-            #le convertir enint
-            #doit être compris dans l'intervalle donnée
-                #retourner le choix
-            #redemander un choix dans l'intervalle 
-        #redemander un choix qui est un nombre getchoice()
+    #boucle infinie:
+        #recupérer get_choice() dans une variable choice
+            #doit être un chiffre 
+                #le convertir enint
+                #doit être compris dans l'intervalle donnée
+                    #retourner le choix
+                #redemander un choix dans l'intervalle 
+            #redemander un choix qui est un nombre getchoice()
 
 
 #éxécuter le choix valide:
-#si le choix est 1 on lance le menu de la partie 
-#si le choix est 2 on lance l'affichage du classement 
-#si le choix est 3 on quitte le jeu 
+    #si le choix est 1 on lance le menu de la partie 
+    #si le choix est 2 on lance l'affichage du classement 
+    #si le choix est 3 on quitte le jeu 
 
 
 #get username():
-#on récupere dans une variable username l'entrée utilisateur du nom
-#on retourne la var username
+    #on récupere dans une variable username l'entrée utilisateur du nom
+    #on retourne la var username
 
 #choix 1 menu de la partie:
     #on get_username()
@@ -45,108 +45,130 @@
 
 
 #get_heroes():
-#on récupere ds une liste tous les heros depuis la bdd
-#on en retourne la liste 
+    #on récupere ds une liste tous les heros depuis la bdd
+    #on en retourne la liste 
 
-#get_available():
-#on récupère la liste en paramètre dans une variable liste "disponibles"
-#on retourne la liste "disponibles"
+#get_available(list):
+    #on récupère la liste en paramètre dans une variable liste "disponibles"
+    #on retourne la liste "disponibles"
 
 #print_infos():
-#on print la liste en paramètre
+    #on print la liste en paramètre
 
 
 #create_team(): 
-#création d'une variable liste d'équipe vide 
-#on récupère get_all() dans une var all heroes
-#on recupère get_available dans une var available heroes
-#on on affecte une max length à une variable team_max_length
-#boucle de la creation de l'équipe jusqu'à ce qu'elle atteigne team_max_length:
-    #on print_infos la liste des héros disponibles
-    #on demande au joueur de faire un choix valide pour ajouter un héro à son équipe
-        #le héro choisi est ajouté à l'équipe de l'utilisateur
-        #le héro choisi est supprimé de la liste des héros disponibles 
-#la liste équipe est retournée 
+    #création d'une variable liste d'équipe vide 
+    #on récupère get_all() dans une var all heroes
+    #on recupère get_available dans une var available heroes
+    #on on affecte une max length à une variable team_max_length
+    #boucle de la creation de l'équipe jusqu'à ce qu'elle atteigne team_max_length:
+        #on print_infos la liste des héros disponibles
+        #on demande au joueur de faire un choix valide pour ajouter un héro à son équipe
+            #le héro choisi est ajouté à l'équipe de l'utilisateur
+            #le héro choisi est supprimé de la liste des héros disponibles 
+    #la liste équipe est retournée 
 
 
 #get_ranked_players_db():
-#récupérer joueurs présents dans la collection joueurs depuis la db ds une variable players 
-#retourner la variable players
+    #récupérer joueurs présents dans la collection joueurs depuis la db ds une variable players 
+    #retourner la variable players
 
 #get_ranking():
-#recuperer get_ranked_players_db() dans une variable users_ranked
-#on trie la liste du plus petit au plus haut score 
-#on return la liste
+    #recuperer get_ranked_players_db() dans une variable users_ranked
+    #on trie la liste du plus petit au plus haut score 
+    #on return la liste
 
 #choix 2 affichage du classement:
-#on récupère le classement get_ranking() dans une var classement 
-#on print la variable classement
+    #on récupère le classement get_ranking() dans une var classement 
+    #on print la variable classement
 
 #choix 3 quitter:
-#on quitte le jeu
-
-#is_character_alive(): 
-#si les pvs du character concerné (monstre/héro) sont supéreurs à 0 il est vivant
-
-#is_team_alive(team):
-#vérifier les pvs de chaque membre de l'équipe 
-#si les pvs d'au moins un héro de l'équipe sont positifs l'équipe est vivante
+    #on quitte le jeu
 
 
 
-#get_monsters_from_db:
-#on récupère les monstres dans une liste monstres depuis la db
-#on retourne la listre monstres
 
-#get_active_monsters():
-#on récupère get_monsters_from_db dans une liste monstres_actifs
-#on retourne la liste monstres_actifs
 
-#pick_random_choice(list):
-#on choisit un perso alétoire depuis une liste donnée
-#on le retourne
 
-#pick_monster_target(active_team):
-#creer une variable target/cible qui contient un héro aléatoire de l'équipe active 
-#retourner la variable target
 
-#insert_ranked_player: 
-#vérifier si il y a - de 3 utilisateurs dans la bdd
-    #envoyer le joueur avec son score à la bdd  
-#sinon vérifier si le score du joueur est plus élevé que celui de quelqu'un dans le classement
-    #envoyer le joueur avec son score à la bdd  
-    #supprimer de la bdd la personne avec le score le plus bas
+
+
+
+
+#TODO: DÉGATSSSS
+
+#jeu(user_team):
+    #tant que team_is_alive(user_team)
+        #on lance une vague
+        #si is_team_alive
+            #score+1
+    #défaite()
+
 
 
 
 #vague(active_team):
-#on initialise un score à 0
-#monstres=get_active_monsters()
-#on récupère dans une variable random_monster un monstre aléatoire pick_random_choice(monstres) 
-#tant que is_alive(random_monster) et is_team_alive(active_team) :
-    #chaque perso de l'equipe active  
-        #attaque le monstre 
-        #lui afflige des dégats
-    #si les pvs du monstre sont pos
-        #on affecte pick_monster_target(active_team) à une var target_hero
-        #le monstre l'attaque 
-        #le target_hero subit des dégats
+    #on initialise un score à 0
+    #monstres=get_active_monsters()
+    #tant que is_alive(random_monster) et is_team_alive(active_team) :
+        #combat_phase(active_team, monstres)
+
+
+#combat_phase(active_team, monstres):
+    #on récupère dans une variable random_monster un monstre aléatoire pick_random_choice(monstres) 
+    #team_on_monster(active_team, random_monster)
+    #on recupère dans target_hero le retour de monster_on_
+
+
+#insert_ranked_player: 
+    #vérifier si il y a - de 3 utilisateurs dans la bdd
+        #envoyer le joueur avec son score à la bdd  
+    #sinon vérifier si le score du joueur est plus élevé que celui de quelqu'un dans le classement
+        #envoyer le joueur avec son score à la bdd  
+        #supprimer de la bdd la personne avec le score le plus bas
+
+#is_character_alive(): 
+    #si les pvs du character concerné (monstre/héro) sont supéreurs à 0 il est vivant
+
+#is_team_alive(team):
+    #is_alive() pr chaque membre
+    #si les pvs d'au moins un héro de l'équipe sont positifs l'équipe est vivante
+
+#get_monsters_from_db:
+    #on récupère les monstres dans une liste monstres depuis la db
+    #on retourne la listre monstres
+
+#get_active_monsters():
+    #on récupère get_monsters_from_db dans une liste monstres_actifs
+    #on retourne la liste monstres_actifs
+
+#pick_random_choice(list):
+    #on choisit un perso alétoire depuis une liste donnée
+    #on le retourne
+
+
+
+team(active_team, random_monster)
+
+
+#team_on_monster(active_team, random_monster):
+    #pour chaque perso de l'equipe 
+        #si perso is alive   
+            #dégâts(random_monster)
+            #print_attaque(perso, random_monster) 
+
+#monster_on_team(active_team, random_monster):
+    #si is_alive(random_monster)
+        #on affecte pick_random_choice(active_team) à une var target_hero
+        #degats(target_hero)
+        #print_attaque(random_monster, target_hero)
+        #on retourne le target_hero
     #sinon:
         #on supprime le random_monster de la liste monstres
-    #vérifier si les pvs du héro target sont negatifs:
-        #on supprime le héro de l'équipe active
-#le score prend +1
-#victoire du joueur
-
-#jeu(user_team):
-#on affecte la liste user_team à une variable active_team
-
-#tant que les pvs de l'équipe active sont pos
-    #on lance une vague
-#défaite
-#insertion du score ds la bdd 
-#affichage du score du joueur
-#affichage du classement
-#retour au menu principal
 
 
+#défaite():
+    #insert_ranked_player()
+    #affichage du score du joueur
+    #classement()
+    #retour au menu principal
