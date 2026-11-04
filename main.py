@@ -1,97 +1,117 @@
 
-
+from pymongo import MongoClient
 #initialiser la bdd
 
-#se connecter à la bdd
-#BOUCLE DU JEU:
-    #afficher le menu du jeu
-    #recuperer un choix valide
-    #éxecuter le choix 
+#   Importer la db et s'y connecter ---
+client = MongoClient(host='localhost', port=27017)
+db = client.jeu
+#   -----
 
-#max_team_length=3
-
-#afficher le menu():
-    #afficherle header du jeu print_header()
-    #afficher le menu des choix 
-
-#get_choice():
-    #demander un input utilisateur dans une var chocie
-    #retourner le choice
-
-#vérifier choix valide():
-    #boucle infinie:
-        #recupérer get_choice() dans une variable choice
-            #doit être un chiffre 
-                #le convertir en int
-                #doit être compris dans l'intervalle donnée
-                    #retourner le choix
-                #redemander un choix dans l'intervalle 
-            #redemander un choix qui est un nombre getchoice()
+#   Menu------
+def display_game_menu():
+    print_header()
+    print("1.Démarrer une nouvelle partie \n 2. Voir le classement \n 3. Quitter")
+def print_header():
+    print('_'*50)
+    print("Bienvenue sur le jeu !")
+    print('_'*50)
+#   --------
 
 
-#éxécuter le choix valide:
-    #si le choix est 1,lancer le menu de la partie 
-    #si le choix est 2, lancer l'affichage du classement 
-    #si le choix est 3, quitter le jeu 
+#   Choice handling------
+def is_valid(choice, min, max):
+    if not choice.isdigit():
+        return False
+    choice = int(choice)
+    if choice>max and choice<min:
+        return False
+
+def print_error():
+    print('Veuillez entrer un choix valide.')
+
+def get_valid_choice(min,max):
+    while True:
+        choice= input('Entrez votre choix')
+        if is_valid(choice,min,max):
+            return choice
+        else:
+            print_error()
+#   ----------
 
 
-
-#choix 1 menu de la partie:
-    #get_username()
-    #user_team=create_team() 
-    #lancer le jeu(user team) 
-
-
-#get username():
-    #username = valid_username()
-    #retourner la var username
-
-#valid_username(min, max):
-    #boucle infinie:
-        #demander un input dans une var username
-            #la longueur du username doit être comprise dans l'intervalle donnée
-                #retourner le username
-            #redemander un username de la bonne longueur 
-        #redemander un username
-
-#get_heroes():
-    #récuperer ds une liste tous les heros depuis la bdd
-    #return la liste
-
-#get_monsters_from_db:
-    #on récupère les monstres dans une liste monstres depuis la db
-    #on retourne la listre monstres    
-    #retourner la liste 
-
-#print_infos(liste):
-    #on print la liste en paramètre
+#   Running options----
+def run_valid_choice(choice):
+    if choice==1:
+        run_new_game()
+    elif choice==2:
+        run_ranking()
+    elif choice==3:
+        run_quit()
+#   --------
 
 
-#create_team(): 
-    #user_team=[]
-    #available_heroes=get_heroes()
-    #tant que la taille de user_team est plus petite que team_max_length:
-        #on print_infos(available_heroes) la liste des héros disponibles
-        #on demande au joueur de faire un choix valide pour ajouter un héro disponible à son équipe
-            #le héro choisi est ajouté à l'équipe de l'utilisateur
-            #le héro choisi est supprimé de la liste des héros disponibles 
-    #la liste équipe est retournée 
+#   Récupérer toutes les données nécessaires de la db
+
+def get_heroes_from_db():
+    heroes=list(db.perso.find())
+    return heroes
+
+def get_monsters_from_db():
+    monsters=list(db.monstre.find())
+    return monsters
+
+#   Chocix 1----
+
+#       Get valid username-----
+
+def is_username_valid(username, min, max):
+    if username>max and username<min:
+        return False
+
+def get_valid_username():
+    while True:
+        username=input("Veuillez entrer un nom d'utilisateur de minimum 3 caractères")
+        if is_username_valid(username,4,15):
+            return username
+        else:
+            print_error()
+#        -------
+
+#       Create the team------
+
+def print_infos(list):
+    for i,p in enumerate(list):
+        print(f"{i+1}. {p['name']} \033[1m ATK : \033[0m {p['ATK']} \033[1m DEF: \033[0m {p['DEF']} \033[1m PV : \033[0m {p['PV']}")
+    
+max_team_length=3
+
+def create_team(): 
+    user_team=[]
+    available_heroes=get_heroes_from_db()
+    while len(user_team)<max_team_length:
+        print_infos(available_heroes)
+        choice=get_valid_choice(1, len(available_heroes))
+        user_team.append(available_heroes[choice-1])
+        available_heroes.pop(choice-1)
+    print_infos(user_team)
+    return user_team
+#       ----------
+#       Run a round -----
+
+def run_round(username,user_team):
+    score =0
+    while is_team_alive(user_team):
+        run_wave()
+        if is_team_alive(user_team):
+            score+=1
+    defeat(username,score)
 
 
-#jeu(username, user_team):
-    #score = 0
-    #tant que team_is_alive(user_team)
-        #on lance une vague
-        #si is_team_alive(user_team):
-            #score+1
-    #défaite(username,score)
-
-
-#défaite(username, score):
-    #insert_ranked_player(username, score)
-    #display_score(score)
-    #classement()
-    #afficher le menu principal
+def defeat(username, score):
+    insert_ranked_player(username, score)
+    display_score(score)
+    classement()
+    
 
 
 #vague(user_team):
@@ -158,7 +178,10 @@
 #update_victim_hp(degats, chara2, list2)
     #on met à jour les hp du chara 2 dans la list2 
 
-
+def run_new_game():
+    username=get_valid_username()
+    user_team=create_team()
+    run_round(username,user_team)
 
 #choix 2 affichage du classement:
     #on récupère le classement get_ranking() dans une var classement 
@@ -180,3 +203,9 @@
 
 #choix 3 quitter:
     #on quitte le jeu
+    # 
+def main():
+    while True:
+        display_game_menu()
+        choice=get_valid_choice(1,3)
+        run_valid_choice(choice)
